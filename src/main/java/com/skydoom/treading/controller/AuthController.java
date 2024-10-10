@@ -8,6 +8,7 @@ import com.skydoom.treading.response.AuthResponse;
 import com.skydoom.treading.service.CustomerUserDetailsService;
 import com.skydoom.treading.service.EmailService;
 import com.skydoom.treading.service.TwoFactorOtpService;
+import com.skydoom.treading.service.WatchlistService;
 import com.skydoom.treading.utils.OtpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,9 @@ public class AuthController {
     private TwoFactorOtpService twoFactorOtpService;
 
     @Autowired
+    private WatchlistService watchlistService;
+
+    @Autowired
     private EmailService emailService;
 
     @PostMapping("/signup")
@@ -51,6 +55,8 @@ public class AuthController {
         newUser.setFullName(user.getFullName());
 
         User saveUser = userRepository.save(newUser);
+
+        watchlistService.createWatchlist(saveUser);
 
         Authentication auth = new UsernamePasswordAuthenticationToken(
                 user.getEmail(),

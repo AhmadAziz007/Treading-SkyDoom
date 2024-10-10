@@ -18,7 +18,7 @@ public class Watchlist {
     @OneToOne
     private User user;
 
-    @ManyToOne
+    @ManyToMany
     private List<Coin> coins = new ArrayList<>();
 
     public Long getId() {

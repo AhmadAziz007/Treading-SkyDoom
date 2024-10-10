@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "two_factor_otp", schema = "public")
 public class TwoFactorOTP {
     @Id
     private String id;

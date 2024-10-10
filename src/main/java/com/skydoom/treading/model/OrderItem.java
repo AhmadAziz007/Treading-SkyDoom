@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "order_item", schema = "public")
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

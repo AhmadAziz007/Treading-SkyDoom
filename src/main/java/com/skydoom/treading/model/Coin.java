@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "coins", schema = "public")
 public class Coin {
     @Id
     @JsonProperty("id")
@@ -31,16 +29,16 @@ public class Coin {
     private Double currentPrice;
 
     @JsonProperty("market_cap")
-    private Long marketCap;
+    private long marketCap;
 
     @JsonProperty("market_cap_rank")
     private Integer marketCapRank;
 
     @JsonProperty("fully_diluted_valuation")
-    private Long fullyDilutedValuation;
+    private long fullyDilutedValuation;
 
     @JsonProperty("total_volume")
-    private Long totalVolume;
+    private long totalVolume;
 
     @JsonProperty("high_24h")
     private Double high24h;
@@ -55,19 +53,19 @@ public class Coin {
     private Double priceChangePercentage24h;
 
     @JsonProperty("market_cap_change_24h")
-    private Long marketCapChange24h;
+    private long marketCapChange24h;
 
     @JsonProperty("market_cap_change_percentage_24h")
     private Double marketCapChangePercentage24h;
 
     @JsonProperty("circulating_supply")
-    private Long circulatingSupply;
+    private long circulatingSupply;
 
     @JsonProperty("total_supply")
-    private Long totalSupply;
+    private long totalSupply;
 
     @JsonProperty("max_supply")
-    private Long maxSupply;
+    private long maxSupply;
 
     @JsonProperty("ath")
     private Double ath;
@@ -129,11 +127,11 @@ public class Coin {
         this.image = image;
     }
 
-    public double getCurrentPrice() {
+    public Double getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(double currentPrice) {
+    public void setCurrentPrice(Double currentPrice) {
         this.currentPrice = currentPrice;
     }
 
@@ -145,11 +143,11 @@ public class Coin {
         this.marketCap = marketCap;
     }
 
-    public int getMarketCapRank() {
+    public Integer getMarketCapRank() {
         return marketCapRank;
     }
 
-    public void setMarketCapRank(int marketCapRank) {
+    public void setMarketCapRank(Integer marketCapRank) {
         this.marketCapRank = marketCapRank;
     }
 
@@ -169,35 +167,35 @@ public class Coin {
         this.totalVolume = totalVolume;
     }
 
-    public double getHigh24h() {
+    public Double getHigh24h() {
         return high24h;
     }
 
-    public void setHigh24h(double high24h) {
+    public void setHigh24h(Double high24h) {
         this.high24h = high24h;
     }
 
-    public double getLow24h() {
+    public Double getLow24h() {
         return low24h;
     }
 
-    public void setLow24h(double low24h) {
+    public void setLow24h(Double low24h) {
         this.low24h = low24h;
     }
 
-    public double getPriceChange24h() {
+    public Double getPriceChange24h() {
         return priceChange24h;
     }
 
-    public void setPriceChange24h(double priceChange24h) {
+    public void setPriceChange24h(Double priceChange24h) {
         this.priceChange24h = priceChange24h;
     }
 
-    public double getPriceChangePercentage24h() {
+    public Double getPriceChangePercentage24h() {
         return priceChangePercentage24h;
     }
 
-    public void setPriceChangePercentage24h(double priceChangePercentage24h) {
+    public void setPriceChangePercentage24h(Double priceChangePercentage24h) {
         this.priceChangePercentage24h = priceChangePercentage24h;
     }
 
@@ -209,11 +207,11 @@ public class Coin {
         this.marketCapChange24h = marketCapChange24h;
     }
 
-    public double getMarketCapChangePercentage24h() {
+    public Double getMarketCapChangePercentage24h() {
         return marketCapChangePercentage24h;
     }
 
-    public void setMarketCapChangePercentage24h(double marketCapChangePercentage24h) {
+    public void setMarketCapChangePercentage24h(Double marketCapChangePercentage24h) {
         this.marketCapChangePercentage24h = marketCapChangePercentage24h;
     }
 
@@ -241,19 +239,19 @@ public class Coin {
         this.maxSupply = maxSupply;
     }
 
-    public double getAth() {
+    public Double getAth() {
         return ath;
     }
 
-    public void setAth(double ath) {
+    public void setAth(Double ath) {
         this.ath = ath;
     }
 
-    public double getAthChangePercentage() {
+    public Double getAthChangePercentage() {
         return athChangePercentage;
     }
 
-    public void setAthChangePercentage(double athChangePercentage) {
+    public void setAthChangePercentage(Double athChangePercentage) {
         this.athChangePercentage = athChangePercentage;
     }
 
@@ -265,19 +263,19 @@ public class Coin {
         this.athDate = athDate;
     }
 
-    public double getAtl() {
+    public Double getAtl() {
         return atl;
     }
 
-    public void setAtl(double atl) {
+    public void setAtl(Double atl) {
         this.atl = atl;
     }
 
-    public double getAtlChangePercentage() {
+    public Double getAtlChangePercentage() {
         return atlChangePercentage;
     }
 
-    public void setAtlChangePercentage(double atlChangePercentage) {
+    public void setAtlChangePercentage(Double atlChangePercentage) {
         this.atlChangePercentage = atlChangePercentage;
     }
 

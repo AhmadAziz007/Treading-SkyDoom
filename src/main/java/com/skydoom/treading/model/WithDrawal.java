@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "wallet", schema = "public")
 public class WithDrawal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "coins", schema = "public")
 public class PaymentOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

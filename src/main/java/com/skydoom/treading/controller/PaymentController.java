@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
 public class PaymentController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class PaymentController {
     public ResponseEntity<PaymentResponse> paymentHandler(
             @PathVariable PaymentMethod paymentMethod,
             @PathVariable Long amount,
-            @RequestHeader("Auhtorization") String jwt) throws Exception, RazorpayException, StripeException {
+            @RequestHeader("Authorization") String jwt) throws Exception, RazorpayException, StripeException {
 
         User user = userService.findUserProfileByJwt(jwt);
 

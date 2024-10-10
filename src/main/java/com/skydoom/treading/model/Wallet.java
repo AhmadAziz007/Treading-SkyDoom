@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@Table(name = "wallet", schema = "public")
 public class Wallet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
