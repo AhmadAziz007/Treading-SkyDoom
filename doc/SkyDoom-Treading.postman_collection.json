@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "63daf8f6-d3c4-4c5f-a79a-a79ca0bf5904",
+		"name": "SkyDoom-Treading",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20727504"
+	},
+	"item": [
+		{
+			"name": "controller-auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\" : \"angga\",\r\n    \"email\" : \"angga@gmail.com\",\r\n    \"password\" : \"12345\",\r\n    \"mobile\" : \"89341235235\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5456/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"nurvan@gmail.com\",\r\n    \"password\" : \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5456/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5456/api/users/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg0NTc5ODEsImV4cCI6MTcyODU0NDM4MSwiZW1haWwiOiJsaW5nZ2FAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOiIifQ.4I5tfPJk1wE1-8AFZLViS_5jSY2q7PRSHc3Q2R1qv_JvflrvGfuNM3tG8vO2d9V0YbpA34kCDCgVXpeuu-5nQQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/users/102",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"users",
+								"102"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "coin - service",
+			"item": [
+				{
+					"name": "get coins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/coins?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"coins"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find coin by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/coins/details/bitcoin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"coins",
+								"details",
+								"bitcoin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "market data chart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/coins/bitcoin/chart?days=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"coins",
+								"bitcoin",
+								"chart"
+							],
+							"query": [
+								{
+									"key": "days",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get top 50 coins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/coins/top50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"coins",
+								"top50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get traeding coin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/coins/treading",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"coins",
+								"treading"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "watchlist -service",
+			"item": [
+				{
+					"name": "user watchlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/watchlist/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"watchlist",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add to watchlist",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDgyNDMsImV4cCI6MTcyODYzNDY0MywiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.yl5lyXJfBiDG1SoPCvIO_uaJTOSwyiXyR30ynZuf2pEddgIABuZlLzo0aHPVo3t1SJ3Ga_SsscDsQGycXLDwZQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/watchlist/add/coin/bitcoin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"watchlist",
+								"add",
+								"coin",
+								"bitcoin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wallet - service",
+			"item": [
+				{
+					"name": "get wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment getaway",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/payment/RAZORPAY/amount/10000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"payment",
+								"RAZORPAY",
+								"amount",
+								"10000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
