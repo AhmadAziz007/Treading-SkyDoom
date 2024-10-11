@@ -272,7 +272,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
 									"type": "string"
 								}
 							]
@@ -341,7 +341,37 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wallet 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2NTU0NDEsImV4cCI6MTcyODc0MTg0MSwiZW1haWwiOiJsaW5nZ2FAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOiIifQ.UtqLJwOpObjIviUCz5iaNOkNJo9v0CDft5_RlEmt3ndNbdJJiyKu0ALsY5faYp5dXD6xY9Mq6HwI09NW4wqxLA",
 									"type": "string"
 								}
 							]
@@ -371,7 +401,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg1NDg5MjAsImV4cCI6MTcyODYzNTMyMCwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.J1IIADnfI7C9vNF1JbIiRS3SV2MC-IjkOLkTEaH-Sj5HzSHEOl9yQFZ_yKbXhwk7jBDA_WA1jams5SUBHUpZFg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
 									"type": "string"
 								}
 							]
@@ -379,7 +409,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5456/api/payment/RAZORPAY/amount/10000",
+							"raw": "http://localhost:5456/api/payment/PAYPAL/amount/100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -388,9 +418,339 @@
 							"path": [
 								"api",
 								"payment",
-								"RAZORPAY",
+								"PAYPAL",
 								"amount",
-								"10000"
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deposite",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/wallet/deposit?order_id=1&payment_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"wallet",
+								"deposit"
+							],
+							"query": [
+								{
+									"key": "order_id",
+									"value": "1"
+								},
+								{
+									"key": "payment_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transfer wallet to wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\" : 10,\r\n    \"purpose\" : \"friend gift\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5456/api/wallet/2/transfer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"wallet",
+								"2",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wallet transaction",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order - service",
+			"item": [
+				{
+					"name": "pay order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"coinId\" : \"tether\",\r\n    \"quantity\" : \"5\",\r\n    \"orderType\" : \"SELL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5456/api/orders/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"orders",
+								"pay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "portfolio service",
+			"item": [
+				{
+					"name": "get all asset",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/asset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"asset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment details",
+			"item": [
+				{
+					"name": "get user payment details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/payment-details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"payment-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add payment details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\" : \"235123613\",\r\n    \"accountHolderName\" : \"james bond\",\r\n    \"ifsc\" : \"YES001\",\r\n    \"bankName\" : \"Bank BCA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5456/api/payment-details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"payment-details"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "withdrawal -service",
+			"item": [
+				{
+					"name": "withdrawal request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/withdrawal/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"withdrawal",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdrawal history",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3Mjg2MDY3NDIsImV4cCI6MTcyODY5MzE0MiwiZW1haWwiOiJhbmdnYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6IiJ9.fNxKoHAUdW9qVQVBlPHPGmwcX0qVtbk3bkv7KOkns2KnBcs3mkjAEvim4gMhq29xQhgJXpGFT1OFgZ1mOU1dgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5456/api/withdrawal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5456",
+							"path": [
+								"api",
+								"withdrawal"
 							]
 						}
 					},
