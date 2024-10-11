@@ -58,7 +58,8 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findByUserId(userId);
     }
 
-    private OrderItem createOrderItem(Coin coin, double quantity, double buyPrice, double sellPrice){
+    private OrderItem createOrderItem(Coin coin, double quantity,
+                                      double buyPrice, double sellPrice){
         OrderItem orderItem = new OrderItem();
         orderItem.setCoin(coin);
         orderItem.setQuantity(quantity);
@@ -114,14 +115,16 @@ public class OrderServiceImpl implements OrderService {
 
         if (assetToSell != null) {
             OrderItem orderItem = createOrderItem(coin,
-                    quantity, buyPrice, sellPrice);
+                    quantity,
+                    buyPrice,
+                    sellPrice);
 
             Order order = createOrder(user, orderItem, OrderType.SELL);
             orderItem.setOrder(order);
 
             if (assetToSell.getQuantity() >= quantity) {
                 order.setStatus(OrderStatus.SUCCESS);
-                order.setOrderType(OrderType.BUY);
+                order.setOrderType(OrderType.SELL);
                 Order savedOrder = orderRepository.save(order);
 
                 walletService.payOrderPayment(order, user);
@@ -146,7 +149,7 @@ public class OrderServiceImpl implements OrderService {
         if (orderType.equals(OrderType.BUY)) {
             return buyAsset(coin, quantity, user);
         } else if (orderType.equals(OrderType.SELL)) {
-            return sellAsset(coin,quantity,user);
+            return sellAsset(coin, quantity, user);
         }
         throw new Exception("Invalid order type");
     }

@@ -26,7 +26,7 @@ public class PaymentController {
     public ResponseEntity<PaymentResponse> paymentHandler(
             @PathVariable PaymentMethod paymentMethod,
             @PathVariable Long amount,
-            @RequestHeader("Authorization") String jwt) throws Exception, RazorpayException, StripeException {
+            @RequestHeader("Authorization") String jwt) throws Exception {
 
         User user = userService.findUserProfileByJwt(jwt);
 
@@ -34,11 +34,12 @@ public class PaymentController {
 
         PaymentOrder order = paymentService.createOrder(user, amount, paymentMethod);
 
-        if (paymentMethod.equals(PaymentMethod.RAZORPAY)) {
-            paymentResponse = paymentService.createRazorpayPaymentLink(user, amount);
+        if (paymentMethod.equals(PaymentMethod.PAYPAL)) {
+            paymentResponse = paymentService.createPaypalPaymentLink(user, amount, order.getId());
         } else {
             paymentResponse = paymentService.createStripePaymentLink(user, amount, order.getId());
         }
         return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
+
     }
 }

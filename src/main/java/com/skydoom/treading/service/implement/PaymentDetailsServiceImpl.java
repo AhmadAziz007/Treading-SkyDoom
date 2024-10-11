@@ -14,7 +14,12 @@ public class PaymentDetailsServiceImpl implements PaymentDetailsService {
     private PaymentDetailsRepository paymentDetailsRepository;
 
     @Override
-    public PaymentDetails addPaymentDetails(String accountNumber, String accountHolderName, String ifac, String bankName, User user) {
+    public PaymentDetails addPaymentDetails(String accountNumber,
+                                            String accountHolderName,
+                                            String ifac,
+                                            String bankName,
+                                            User user) {
+
         PaymentDetails paymentDetails = new PaymentDetails();
 
         paymentDetails.setAccountNumber(accountNumber);

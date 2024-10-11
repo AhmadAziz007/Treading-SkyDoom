@@ -1,5 +1,9 @@
 package com.skydoom.treading.service.implement;
 
+import com.paypal.core.PayPalEnvironment;
+import com.paypal.core.PayPalHttpClient;
+import com.paypal.http.HttpResponse;
+import com.paypal.orders.*;
 import com.razorpay.Payment;
 import com.razorpay.PaymentLink;
 import com.razorpay.RazorpayClient;
@@ -20,6 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.*;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
@@ -28,13 +35,20 @@ public class PaymentServiceImpl implements PaymentService {
     @Value("${stipe.api.key}")
     private String stipeSecretKey;
 
-    @Value("${razorpay.api.key}")
-    private String apiKey;
+//    @Value("${razorpay.api.key}")
+//    private String apiKey;
+//
+//    @Value("${razorpay.api.secret}")
+//    private String apiSecretKey;
 
-    @Value("${razorpay.api.secret}")
-    private String apiSecretKey;
+    @Value("${paypal.client.id}")
+    private String paypalClientId;
 
+    @Value("${paypal.client.secret}")
+    private String paypalSecret;
 
+    @Value("${paypal.mode}")
+    private String paypalMode;
 
     @Override
     public PaymentOrder createOrder(User user,
@@ -45,6 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
         paymentOrder.setUser(user);
         paymentOrder.setAmount(amount);
         paymentOrder.setPaymentMethod(paymentMethod);
+        paymentOrder.setStatus(PaymentOrderStatus.PENDING);
 
         return paymentOrderRepository.save(paymentOrder);
     }
@@ -56,23 +71,34 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Boolean ProccedPaymentOrder(PaymentOrder paymentOrder, String paymentId) throws RazorpayException {
-        if (paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)){
-            if (paymentOrder.getPaymentMethod().equals(PaymentMethod.RAZORPAY)){
-                RazorpayClient razorpay = new RazorpayClient(apiKey,apiSecretKey);
-                Payment payment = razorpay.payments.fetch(paymentId);
+    public Boolean ProccedPaymentOrder(PaymentOrder paymentOrder, String paymentId) throws IOException {
+        if (paymentOrder.getStatus() == null) {
+            paymentOrder.setStatus(PaymentOrderStatus.PENDING);
+        }
+        if (paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)) {
+            if (paymentOrder.getPaymentMethod().equals(PaymentMethod.PAYPAL)) {
+                // Initialize PayPal environment (sandbox/live)
+                PayPalEnvironment environment = new PayPalEnvironment.Sandbox(paypalClientId, paypalSecret);
+                PayPalHttpClient client = new PayPalHttpClient(environment);
 
-                Integer amount = payment.get("amount");
-                String status = payment.get("status");
+                // Retrieve the PayPal order based on the paymentId
+                OrdersGetRequest request = new OrdersGetRequest(paymentId);
+                HttpResponse<Order> response = client.execute(request);
+                Order order = response.result();
 
-                if (status.equals("captured")){
+                // Check the status of the PayPal payment
+                String status = order.status();
+                if ("COMPLETED".equals(status)) {
                     paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
+                    paymentOrderRepository.save(paymentOrder);
                     return true;
+                } else {
+                    paymentOrder.setStatus(PaymentOrderStatus.FAILED);
+                    paymentOrderRepository.save(paymentOrder);
+                    return false;
                 }
-                paymentOrder.setStatus(PaymentOrderStatus.FAILED);
-                paymentOrderRepository.save(paymentOrder);
-                return false;
             }
+            // If the payment method is something else (e.g., Stripe)
             paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
             paymentOrderRepository.save(paymentOrder);
             return true;
@@ -81,51 +107,45 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentResponse createRazorpayPaymentLink(User user, Long amount) throws RazorpayException {
-        Long Amount = amount * 100;
-
+    public PaymentResponse createPaypalPaymentLink(User user, Long amount, Long orderId) throws Exception {
         try {
-            //Instantiante a Razorpay client with your key ID and secret
-            RazorpayClient razorpay = new RazorpayClient(apiKey, apiSecretKey);
+            // Inisialisasi environment PayPal (sandbox/live)
+            PayPalEnvironment environment = new PayPalEnvironment.Sandbox(paypalClientId, paypalSecret);
+            PayPalHttpClient client = new PayPalHttpClient(environment);
 
-            // Create a JSON object with the payment link request parameters
-            JSONObject paymentLinkRequest = new JSONObject();
-            paymentLinkRequest.put("amount", amount);
-            paymentLinkRequest.put("currency", "INR");
+            // Membangun permintaan pembayaran
+            AmountWithBreakdown amountBreakdown = new AmountWithBreakdown()
+                    .currencyCode("USD")
+                    .value(String.format("%.2f", amount / 100.0));
 
-            // Create a JSON object with the customer details
-            JSONObject customer = new JSONObject();
-            customer.put("name", user.getFullName());
+            List<PurchaseUnitRequest> purchaseUnits = new ArrayList<>();
+            purchaseUnits.add(new PurchaseUnitRequest().amountWithBreakdown(amountBreakdown));
 
-            customer.put("email",user.getEmail());
-            paymentLinkRequest.put("customer", customer);
+            OrderRequest orderRequest = new OrderRequest();
+            orderRequest.checkoutPaymentIntent("CAPTURE");
+            orderRequest.purchaseUnits(purchaseUnits);
 
-            //Create a JSON object with the notification settings
-            JSONObject notify = new JSONObject();
-            notify.put("email", true);
-            paymentLinkRequest.put("notify", notify);
+            // Membuat order
+            OrdersCreateRequest request = new OrdersCreateRequest().requestBody(orderRequest);
+            HttpResponse<Order> response = client.execute(request);
+            Order order = response.result();
 
-            // Set the reminder settings
-            paymentLinkRequest.put("reminder_enable", true);
+            // Mendapatkan link persetujuan dari PayPal
+            String approvalLink = order.links().stream()
+                    .filter(link -> "approve".equals(link.rel()))
+                    .findFirst()
+                    .map(LinkDescription::href)
+                    .orElseThrow(() -> new Exception("Approval link not found"));
 
-            //Set the callback URL and method
-            paymentLinkRequest.put("callback_url","http://localhost:5173/wallet");
-            paymentLinkRequest.put("callback_method", "get");
-
-            // Create the payment link using the paymentLink.create() method
-            PaymentLink payment = razorpay.paymentLink.create(paymentLinkRequest);
-
-            String paymentLinkId = payment.get("id");
-            String paymentLinkURl = payment.get("short_url");
-
+            // Membuat response yang berisi URL pembayaran
             PaymentResponse res = new PaymentResponse();
-            res.setPayment_url(paymentLinkURl);
+            res.setPayment_url(approvalLink);
 
             return res;
 
-        } catch (RazorpayException e) {
-            System.out.println("Error creating payment link" + e.getMessage());
-            throw new RazorpayException(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error creating PayPal payment link: " + e.getMessage());
+            throw new Exception("PayPal Payment creation failed", e);
         }
     }
 
@@ -146,16 +166,16 @@ public class PaymentServiceImpl implements PaymentService {
                         .setQuantity(1L)
                         .setPriceData(
                                 SessionCreateParams.LineItem.PriceData.builder()
-                                .setCurrency("usd")
-                                .setUnitAmount(amount*100)
-                                .setProductData(SessionCreateParams
-                                        .LineItem
-                                        .PriceData
-                                        .ProductData
-                                        .builder()
-                                        .setName("Top up wallet")
-                                        .build()
-                                ).build()
+                                        .setCurrency("usd")
+                                        .setUnitAmount(amount*100)
+                                        .setProductData(SessionCreateParams
+                                                .LineItem
+                                                .PriceData
+                                                .ProductData
+                                                .builder()
+                                                .setName("Top up wallet")
+                                                .build()
+                                        ).build()
                         ).build()
                 ).build();
 

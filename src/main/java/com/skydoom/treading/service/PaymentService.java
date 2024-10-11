@@ -7,6 +7,8 @@ import com.skydoom.treading.model.User;
 import com.skydoom.treading.response.PaymentResponse;
 import com.stripe.exception.StripeException;
 
+import java.io.IOException;
+
 public interface PaymentService {
 
     PaymentOrder createOrder(User user,
@@ -15,9 +17,9 @@ public interface PaymentService {
 
     PaymentOrder getPaymentOrderById(Long id) throws Exception;
 
-    Boolean ProccedPaymentOrder(PaymentOrder paymentOrder, String paymentId) throws RazorpayException;
+    Boolean ProccedPaymentOrder(PaymentOrder paymentOrder, String paymentId) throws RazorpayException, IOException;
 
-    PaymentResponse createRazorpayPaymentLink(User user, Long amount) throws RazorpayException;
+    PaymentResponse createPaypalPaymentLink(User user, Long amount, Long orderId) throws Exception;
 
     PaymentResponse createStripePaymentLink(User user, Long amount, Long orderId) throws StripeException;
 
