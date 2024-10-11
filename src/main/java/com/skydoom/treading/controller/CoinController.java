@@ -3,6 +3,7 @@ package com.skydoom.treading.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.skydoom.treading.dto.CoinDto;
 import com.skydoom.treading.model.Coin;
 import com.skydoom.treading.service.CoinService;
 import org.apache.coyote.Response;

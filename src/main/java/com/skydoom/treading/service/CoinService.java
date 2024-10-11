@@ -1,11 +1,12 @@
 package com.skydoom.treading.service;
 
+import com.skydoom.treading.dto.CoinDto;
 import com.skydoom.treading.model.Coin;
 
 import java.util.List;
 
 public interface CoinService {
-    List<Coin> getCoinList(int page) throws Exception;
+    List<Coin>  getCoinList(int page) throws Exception;
 
     String getMarketChart(String coinId, int days) throws Exception;
 
