@@ -15,13 +15,21 @@ public class PaymentDetails {
 
     private String accountHolderName;
 
-    private String ifac;
+    private String ifsc;
 
     private String bankName;
 
     @OneToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
+
+    public String getIfsc() {
+        return ifsc;
+    }
+
+    public void setIfsc(String ifsc) {
+        this.ifsc = ifsc;
+    }
 
     public Long getId() {
         return id;
@@ -45,14 +53,6 @@ public class PaymentDetails {
 
     public void setAccountHolderName(String accountHolderName) {
         this.accountHolderName = accountHolderName;
-    }
-
-    public String getIfac() {
-        return ifac;
-    }
-
-    public void setIfac(String ifac) {
-        this.ifac = ifac;
     }
 
     public String getBankName() {
