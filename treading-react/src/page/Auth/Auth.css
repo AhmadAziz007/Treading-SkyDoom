@@ -1,0 +1,26 @@
+.authContainer{
+  background-image: url("https://bitcoinaddict.org/wp-content/uploads/2020/05/68554698_l.jpg");
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bgBlure {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 35rem;
+  width: 30rem;
+  border-radius: 0.5rem;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px white;
+}
